@@ -1,5 +1,5 @@
 #!/bin/bash
-# install.sh — CLI-Style installer
+# install.sh — CLI-Style installer with theme selector
 
 set -e
 
@@ -28,19 +28,49 @@ fi
 echo "💾 Backing up current .bashrc..."
 cp -f ~/.bashrc ~/.bashrc.backup
 
-echo "🎨 Adding banner and prompt to .bashrc..."
+# =========================
+# 🎨 Theme Selector
+# =========================
+echo ""
+echo "Choose your CLI prompt style:"
+echo "1) Minimal   → \u@\h \$"
+echo "2) Classic   → \u@\h:\w \$ (with color)"
+echo "3) Fancy     → Multiline, bold, full color"
+echo ""
 
-cat << 'EOF' >> ~/.bashrc
+read -p "Enter theme number (1-3): " THEME_CHOICE
+
+case $THEME_CHOICE in
+  1)
+    PROMPT='PS1="\u@\h \$ "'
+    ;;
+  2)
+    PROMPT='PS1="\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\] \$ "'
+    ;;
+  3)
+    PROMPT='PS1="\[\e[1;35m\]\u@\h \[\e[1;36m\]\w\[\e[0m\]\n\$ "'
+    ;;
+  *)
+    echo "❌ Invalid choice. Using default (Fancy)."
+    PROMPT='PS1="\[\e[1;35m\]\u@\h \[\e[1;36m\]\w\[\e[0m\]\n\$ "'
+    ;;
+esac
+
+# =========================
+# Append to .bashrc
+# =========================
+echo "🎨 Applying CLI style..."
+
+cat <<EOF >> ~/.bashrc
 
 # ==== CLI-STYLE CUSTOMIZATION ====
 clear
 figlet "Welcome!" | lolcat
 neofetch
 
-# Colorful prompt: user@host:~$
-PS1='\[\e[1;35m\]\u@\h \[\e[1;36m\]\w\[\e[0m\]\n$ '
+$PROMPT
 
 # ==== END CLI-STYLE ====
 EOF
 
-echo "✅ Done! Launch a new terminal or run 'source ~/.bashrc' to see your style in action."
+echo "✅ Style applied! Launch a new terminal or run: source ~/.bashrc"
