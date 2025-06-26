@@ -1,13 +1,8 @@
+[![Sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-lightgrey?logo=github)](https://github.com/sponsors/new-life-edu)
+
 # 🎨 CLI-Style
 
-**Make your terminal yours** — a lightweight toolkit to customize your Linux or Termux shell with:
-
-- 💡 ASCII art banners  
-- 🎨 Colorful command prompts (PS1)  
-- ⚡ Neofetch system info  
-- 🌈 Rainbow output with `lolcat`
-
-> Built for people who love the command line and want it to feel like home.
+![Shell Script](https://img.shields.io/badge/script-bash-green.svg)
 
 ## 🚀 Features
 
